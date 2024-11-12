@@ -1,16 +1,82 @@
 body {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  background-color: black;
+  grid-template-columns: 1fr 4fr;
+  width: 1000px;
+  margin: auto;
+}
+
+#sidebar {
+  color: aliceblue;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: rgb(221, 212, 183);
-  margin: 30px;
+  padding: 10px 15px;
+  background-color: rgb(39, 119, 173);
 }
 
-header {
-padding-bottom: 5px;
+#sidebar ul {
+  margin: 0;
+  padding: 0;
 }
 
-button:disabled {
-  background-color: darkred;
-  color: white;
+#sidebar li {
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  padding: 6px 0;
+}
+
+#sidebar button {
+  font-size: 1rem;
+  padding: 5px;
+  flex: 1;
+}
+
+#content {
+  display: flex;
+  background-color: rgb(49, 49, 63);
+  padding: 10px;
+}
+
+#project-list {
+  display:flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap:10px;
+  color: aliceblue;
+}
+
+.project-item {
+  background-color: rgb(148, 115, 59);
+  padding-left:10px;
+  flex: 1;
+}
+
+.project-item:hover {
+  background-color: rgb(113, 145, 63);
+}
+
+
+/* todo-list and items are placeholder and will need reworking to fit into content properly */
+#todo-list {
+  display: grid;
+  justify-content:space-around;
+  background-color: rgb(49, 49, 63);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(autofit, minmax(150px, 1fr));
+  grid-auto-flow: row;
+  gap: 10px;
+  padding: 10px;
+}
+
+.todo-item {
+  background-color: rgb(218, 208, 193);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.todo-item button {
+  margin-right: 10px;
 }

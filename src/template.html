@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header>
-    <nav>
-      <button id="home">Home</button>
-      <button id="menu">Menu</button>
-      <button id="about">About</button>
-    </nav>
-  </header>
-  <div id="content">
+  <div id="sidebar">
+    <h1>Todo Menu</h1>
+      <ul>
+        <li>
+          <button id="sb-viewproj">View Projects</button>
+        </li>
+        <li>
+          <button id="sb-addtodo">Add a todo</button>
+        </li>
+      </ul>
+
   </div>
-  
+  <div id="content">
+    <div id="project-list">
+      <h1>Projects:</h1>
+      <div class="project-item">
+        <h2>Todo-list website project</h2>
+        <p>Number of Tasks: 3</p>
+      </div>
+      <div class="project-item">
+        <h2>Other project</h2>
+        <p>Number of Tasks: 1</p>
+      </div>
+    </div>
+  </div>
+
 </body>
+<script src="index.js" defer></script>
+
 </html>
