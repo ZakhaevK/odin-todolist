@@ -36,6 +36,8 @@ body {
 
 #content {
   display: flex;
+  color: aliceblue;
+  flex-direction: column;
   background-color: rgb(49, 49, 63);
   padding: 10px;
 }
@@ -45,7 +47,6 @@ body {
   flex-direction: column;
   flex-grow: 1;
   gap:10px;
-  color: aliceblue;
 }
 
 .project-item {
@@ -62,19 +63,56 @@ body {
 /* todo-list and items are placeholder and will need reworking to fit into content properly */
 #todo-list {
   display: grid;
-  justify-content:space-around;
+  justify-content: space-around;
   background-color: rgb(49, 49, 63);
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(autofit, minmax(150px, 1fr));
   grid-auto-flow: row;
   gap: 10px;
-  padding: 10px;
+}
+
+#todo-list h2 {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 6px;
+  font-size: 1.3rem;
+}
+
+.todo-item, .todo-item-expand {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px;
+  border-radius: 5px;
 }
 
 .todo-item {
-  background-color: rgb(218, 208, 193);
-  padding: 10px;
-  border-radius: 5px;
+  background-color: rgb(138, 95, 55);
+}
+
+.todo-item:hover {
+  background-color: rgb(131, 83, 38);
+}
+
+.todo-item p, .todo-item-expand p {
+  padding: 0;
+  margin: 0;
+  margin-bottom: 6px;
+}
+
+.todo-item-expand {
+  background-color: rgb(190, 127, 55);
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.todo-item-expand ul {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 6px;
+}
+
+.todo-item-expand li {
+  margin: 0 18px;
 }
 
 .todo-item button {
