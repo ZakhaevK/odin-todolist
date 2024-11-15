@@ -36,7 +36,7 @@ body {
 
 #content {
   display: flex;
-  color: aliceblue;
+  color: rgb(240, 240, 240);
   flex-direction: column;
   background-color: rgb(49, 49, 63);
   padding: 10px;
