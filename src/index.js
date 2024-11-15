@@ -83,5 +83,9 @@ class TodoItem {
     this.#notes.append(priority);
   }
 
+  deleteNote(index) {
+    this.#notes.splice(index, 1);
+  }
+
 
 }
