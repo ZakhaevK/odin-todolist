@@ -1,5 +1,11 @@
-// Will feature DOM manipulation later
+
 export { generateProjectPage, generateTodoPage };
+
+// This function will initiaise clickable links on the sidebar
+function initialiseMenu() {
+
+}
+
 const contentDiv = document.getElementById("content");
 
 function generateProjectPage(projectList) {
@@ -48,7 +54,7 @@ function generateTodoPage(project) {
     const dateElement = document.createElement("p");
     
     titleElement.textContent = todo.getTitle();
-    priorityElement.textContent = todo.getPriority();
+    priorityElement.textContent = `Priority: ${todo.getPriority()}`;
     dateElement.textContent = `Due Date: ${todo.getDueDate()}`;
 
     todoDiv.appendChild(titleElement);
