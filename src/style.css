@@ -65,6 +65,7 @@ body {
 
 #sidebar #sb-project-list li {
   list-style:square;
+  padding: 0px;
   margin-left: 10px;
 }
 
