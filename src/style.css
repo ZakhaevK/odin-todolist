@@ -3,7 +3,7 @@ body {
   justify-content: center;
   align-content: center;
   background-color: black;
-  grid-template-columns: 1.1fr 4fr;
+  grid-template-columns: 1.5fr 4fr;
   width: 1000px;
   margin: auto;
 }
@@ -12,10 +12,14 @@ body {
   color: rgb(238, 238, 238);
   display: flex;
   flex-direction: column;
-  padding: 10px 15px;
+  padding: 10px 20px;
   background-color: rgb(63, 66, 77);
-  border-right: 1px solid;
-  border-color: rgb(143, 142, 141);
+  border-right: 2px solid;
+  border-color: rgb(46, 51, 59);
+}
+
+#sidebar h1 {
+  
 }
 
 #sidebar ul {
@@ -31,30 +35,48 @@ body {
 }
 
 #sidebar button {
-  background-color: rgb(73, 114, 167);
+  background-color: rgb(63, 66, 77);
   color:rgb(255, 255, 255);
   font-size: 1rem;
   font-weight: bold;
+  text-align: left;
+  border: 1px;
   border-radius: 5px;
-  margin: 3px 10px;
-  padding: 4px;
+  margin: 1px 0px;
+  padding: 5px;
+  padding-left: 15px;
   flex: 1;
+}
+
+#sidebar button:hover {
+  background-color: rgb(73, 114, 167);
+}
+
+#sidebar button:active {
+  background-color: rgb(53, 89, 136);
 }
 
 #sidebar #sb-project-list {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-left: 10px;
 }
 
 #sidebar #sb-project-list li {
-  list-style: circle;
+  list-style:square;
   margin-left: 10px;
 }
 
 #sidebar #sb-project-list li a {
   font-size: 1.1rem;
-  color: rgb(236, 191, 67);
+  color: rgb(236, 187, 51);
+  text-decoration: none;
+}
+
+#sidebar #sb-project-list li a:hover {
+  color: rgb(253, 212, 101);
+  text-decoration: underline;
 }
 
 #content {
@@ -74,12 +96,30 @@ body {
 
 .project-item {
   background-color: rgb(148, 115, 59);
-  padding-left:10px;
+  border-radius: 2px;
+  padding: 8px 12px;
   flex: 1;
 }
 
 .project-item:hover {
   background-color: rgb(163, 128, 68);
+}
+
+.project-item * {
+  padding: 0px;
+  margin: 0px;
+}
+
+.project-item h2 {
+  margin-bottom: 10px;
+}
+
+.project-item p {
+  margin-bottom: 6px;
+}
+
+.project-item p:last-child {
+  margin-bottom: 0px;
 }
 
 
