@@ -155,6 +155,10 @@ body {
   background-color: rgb(153, 103, 57);
 }
 
+.todo-item.completed {
+  background-color: rgb(78, 105, 42);
+}
+
 .todo-item p, .todo-item-expand p {
   padding: 0;
   margin: 0;
