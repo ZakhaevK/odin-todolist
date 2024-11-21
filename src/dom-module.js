@@ -1,9 +1,40 @@
 
-export { generateProjectPage, generateTodoPage };
+export {  initialiseMenu ,generateProjectPage, generateTodoPage };
 
 // This function will initiaise clickable links on the sidebar
-function initialiseMenu() {
+function initialiseMenu(projectList) {
+  const sidebarDiv = document.getElementById("sidebar");
+  const sbAddTodoButt = document.getElementById("sb-addtodo");
+  const sbNewProjButt = document.getElementById("sb-newproj");
+  const sbViewProjButt = document.getElementById("sb-viewproj");
 
+  sbViewProjButt.addEventListener("click", () => {
+    generateProjectPage();
+  })
+
+  loadSidebarProjectList(projectList);
+}
+
+function loadSidebarProjectList(projectList) {
+  const sbProjectList = document.getElementById("sb-project-list")
+  const projUL = document.createElement("ul");
+
+  clearSidebarProjectList(); // Clear current projects
+
+  for (let project of projectList) {
+    const projLI = document.createElement("li");
+    const projLink = document.createElement("a");
+    projLink.textContent = project.getTitle();
+    projLink.setAttribute("href", ""); // Placeholder
+
+    projLI.appendChild(projLink);
+    sbProjectList.appendChild(projLI);
+  }
+}
+
+function clearSidebarProjectList() {
+  const sbProjectList = document.getElementById("sb-project-list")
+  sbProjectList.replaceChildren("");
 }
 
 const contentDiv = document.getElementById("content");

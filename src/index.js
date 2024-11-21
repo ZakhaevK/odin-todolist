@@ -1,6 +1,6 @@
 import "./style.css";
 import {Project, TodoItem} from  "./obj-module";
-import { generateProjectPage, generateTodoPage } from "./dom-module";
+import { initialiseMenu, generateProjectPage, generateTodoPage } from "./dom-module";
 
 const fns = require('date-fns');
 
@@ -29,3 +29,4 @@ testProj.addTodo(testTodo2);
 
 //  generateProjectPage(projectList);
 generateTodoPage(testProj);
+initialiseMenu(projectList);
