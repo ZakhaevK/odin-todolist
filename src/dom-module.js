@@ -83,16 +83,47 @@ function generateTodoPage(project) {
     const titleElement = document.createElement("h2");
     const priorityElement = document.createElement("p");
     const dateElement = document.createElement("p");
+    const statusElement = document.createElement("p");
     
     titleElement.textContent = todo.getTitle();
     priorityElement.textContent = `Priority: ${todo.getPriority()}`;
     dateElement.textContent = `Due Date: ${todo.getDueDate()}`;
+    statusElement.textContent = `Status: ${todo.getStatus()}`;
 
     todoDiv.appendChild(titleElement);
     todoDiv.appendChild(priorityElement);
     todoDiv.appendChild(dateElement);
+    todoDiv.appendChild(statusElement);
     todoListDiv.appendChild(todoDiv);
+
+    todoDiv.addEventListener("click", () => {
+      expandTodoItem(todo, todoDiv);
+    })
   }
 contentDiv.appendChild(contentTitle);
 contentDiv.appendChild(todoListDiv);
+}
+
+function expandTodoItem(todo, todoDiv) {
+  const todoDesc = document.createElement("p");
+  const notesPara = document.createElement("p");
+  const notesUL = document.createElement("ul");
+
+  todoDesc.textContent = `Description: ${todo.getDescription()}`;
+  notesPara.textContent = "Notes:";
+
+  for (const note of todo.getNotes()) {
+    const noteLI = document.createElement("li");
+    noteLI.textContent = note;
+    notesUL.appendChild(noteLI);
+  }
+
+  todoDiv.setAttribute("class", "todo-item-expand");
+  todoDiv.appendChild(todoDesc);
+  todoDiv.appendChild(notesPara);
+  todoDiv.appendChild(notesUL);
+}
+
+function minimiseTodoItem(todo, todoDiv) {
+  
 }
