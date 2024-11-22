@@ -78,30 +78,35 @@ function generateTodoPage(project) {
   const todoList = project.getTodoList();
   for (let todo of todoList) {
     const todoDiv = document.createElement("div");
-    todoDiv.setAttribute("class", "todo-item")
-
-    const titleElement = document.createElement("h2");
-    const priorityElement = document.createElement("p");
-    const dateElement = document.createElement("p");
-    const statusElement = document.createElement("p");
-    
-    titleElement.textContent = todo.getTitle();
-    priorityElement.textContent = `Priority: ${todo.getPriority()}`;
-    dateElement.textContent = `Due Date: ${todo.getDueDate()}`;
-    statusElement.textContent = `Status: ${todo.getStatus()}`;
-
-    todoDiv.appendChild(titleElement);
-    todoDiv.appendChild(priorityElement);
-    todoDiv.appendChild(dateElement);
-    todoDiv.appendChild(statusElement);
+    generateTodoItem(todo, todoDiv);
     todoListDiv.appendChild(todoDiv);
-
-    todoDiv.addEventListener("click", () => {
-      expandTodoItem(todo, todoDiv);
-    })
   }
 contentDiv.appendChild(contentTitle);
 contentDiv.appendChild(todoListDiv);
+}
+
+
+function generateTodoItem(todo, todoDiv) {
+
+  const titleElement = document.createElement("h2");
+  const priorityElement = document.createElement("p");
+  const dateElement = document.createElement("p");
+  const statusElement = document.createElement("p");
+  
+  titleElement.textContent = todo.getTitle();
+  priorityElement.textContent = `Priority: ${todo.getPriority()}`;
+  dateElement.textContent = `Due Date: ${todo.getDueDate()}`;
+  statusElement.textContent = `Status: ${todo.getStatus()}`;
+
+  todoDiv.setAttribute("class", "todo-item");
+  todoDiv.appendChild(titleElement);
+  todoDiv.appendChild(priorityElement);
+  todoDiv.appendChild(dateElement);
+  todoDiv.appendChild(statusElement);
+
+  todoDiv.addEventListener("click", (e) => {
+    expandTodoItem(todo, todoDiv);
+  })
 }
 
 function expandTodoItem(todo, todoDiv) {
@@ -122,8 +127,9 @@ function expandTodoItem(todo, todoDiv) {
   todoDiv.appendChild(todoDesc);
   todoDiv.appendChild(notesPara);
   todoDiv.appendChild(notesUL);
-}
 
-function minimiseTodoItem(todo, todoDiv) {
-  
+  todoDiv.addEventListener("click", () => {
+    todoDiv.replaceChildren("");
+    generateTodoItem(todo, todoDiv);
+  })
 }
