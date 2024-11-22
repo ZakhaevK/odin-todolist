@@ -104,32 +104,36 @@ function generateTodoItem(todo, todoDiv) {
   todoDiv.appendChild(dateElement);
   todoDiv.appendChild(statusElement);
 
-  todoDiv.addEventListener("click", (e) => {
-    expandTodoItem(todo, todoDiv);
-  })
+  todoDiv.onclick = () => toggleTodoItem(todo, todoDiv);
 }
 
-function expandTodoItem(todo, todoDiv) {
-  const todoDesc = document.createElement("p");
-  const notesPara = document.createElement("p");
-  const notesUL = document.createElement("ul");
+function toggleTodoItem(todo, todoDiv) {
+  const isExpanded = todoDiv.classList.contains("todo-item-expand");
 
-  todoDesc.textContent = `Description: ${todo.getDescription()}`;
-  notesPara.textContent = "Notes:";
-
-  for (const note of todo.getNotes()) {
-    const noteLI = document.createElement("li");
-    noteLI.textContent = note;
-    notesUL.appendChild(noteLI);
-  }
-
-  todoDiv.setAttribute("class", "todo-item-expand");
-  todoDiv.appendChild(todoDesc);
-  todoDiv.appendChild(notesPara);
-  todoDiv.appendChild(notesUL);
-
-  todoDiv.addEventListener("click", () => {
-    todoDiv.replaceChildren("");
+  if (isExpanded) {
+    // Collapse logic for todoDiv
+    todoDiv.replaceChildren(""); 
     generateTodoItem(todo, todoDiv);
-  })
+  } else {
+    // Expand logic for todoDiv
+    const todoDesc = document.createElement("p");
+    const notesPara = document.createElement("p");
+    const notesUL = document.createElement("ul");
+
+    todoDesc.textContent = `Description: ${todo.getDescription()}`;
+    notesPara.textContent = "Notes:";
+
+    for (const note of todo.getNotes()) {
+      const noteLI = document.createElement("li");
+      noteLI.textContent = note;
+      notesUL.appendChild(noteLI);
+    }
+
+    todoDiv.setAttribute("class", "todo-item-expand");
+    todoDiv.appendChild(todoDesc);
+    todoDiv.appendChild(notesPara);
+    todoDiv.appendChild(notesUL);
+
+    todoDiv.onclick = () => toggleTodoItem(todo, todoDiv);
+  }
 }
