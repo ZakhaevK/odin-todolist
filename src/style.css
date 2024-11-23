@@ -161,7 +161,7 @@ body {
 }
 
 .todo-item.completed {
-  background-color: rgb(78, 105, 42);
+  background-color: rgb(74, 97, 44);
 }
 
 .todo-item p, .todo-item-expand p {
@@ -176,6 +176,10 @@ body {
   grid-column-end: 4;
 }
 
+.todo-item-expand.completed {
+  background-color: rgb(87, 129, 33);
+}
+
 .todo-item-expand ul {
   margin: 0;
   padding: 0;
@@ -188,4 +192,49 @@ body {
 
 .todo-item button {
   margin-right: 10px;
+}
+
+/* Styling for new task page */
+
+#new-task-form {
+  padding: 10px 80px;
+  
+}
+
+#new-task-form ul {
+display: flex;
+flex-direction: column;
+gap:5px;
+padding: 15px 10%;
+background-color: rgb(63, 66, 77);
+border-radius: 3px;
+}
+
+#new-task-form li {
+display: flex;
+justify-content:space-between;
+
+}
+
+#new-task-form input {
+  color: white;
+  background-color: rgb(57, 61, 70);
+}
+
+#new-task-form select {
+  color: white;
+  background-color: rgb(57, 61, 70);
+  border-radius: 4px;
+}
+
+#new-task-form button {
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 3px 50px;
+  margin-top: 20px;
+  background-color: rgb(57, 61, 70);
+  border-radius: 4px;
+  align-self: center;
+
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="sidebar">
+    <h1>To-do Menu</h1>
+    <ul>
+      <li>
+        <button id="sb-addtodo">Add Task</button>
+      </li>
+      <li>
+        <button id="sb-newproj">New Project</button>
+      </li>
+      <li>
+        <button id="sb-viewproj">My Projects</button>
+      </li>
+    </ul>
+
+    <div id="sb-project-list">
+      <ul>
+        <li><a href="">Test Project</a></li>
+        <li><a href="">Test Project 2</a></li>
+      </ul>
+    </div>
+
+  </div>
+  <div id="content">
+    <h1>New Task</h1>
+    <form id="new-task-form">
+      <ul>
+        <li><label for="taskproj">Project:</label>
+          <select id="taskproj">
+            <option value="Test Project 1">Test Project 1</option>
+            <option value="Test Project 1">Test Project 2</option>
+          </select>
+        </li>
+        <li><label for="taskname">Name:</label>
+          <input type="text" id="taskname">
+        </li>
+        <li><label for="taskdesc">Description:</label>
+          <input type="text" id="taskdesc">
+        </li>
+        <li><label for="taskdate">Due Date:</label>
+          <input type="text" id="taskdate">
+        </li>
+        <li><label for="taskstatus">Initial Status:</label>
+          <select id="taskstatus">
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Complete">Complete</option>
+          </select>
+        </li>
+        <li><label for="taskprio">Priority:</label>
+          <input type="text" id="taskprio">
+        </li>
+        <li><label for="tasknotes">Notes:</label>
+          <input type="text" id="tasknotes">
+        </li>
+        <button type="submit">Create</button>
+      </ul>
+    </form>
+  </div>
+
+
+</body>
+<script src="index.js" defer></script>
+
+</html>
