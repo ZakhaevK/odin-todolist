@@ -227,7 +227,22 @@ justify-content:space-between;
   border-radius: 4px;
 }
 
-#new-task-form button {
+#new-task-form #tasknotebutt {
+  border-radius: 3px;
+}
+
+#new-task-form #tasknotes p {
+  align-self: center;
+  padding: 0px;
+  margin: 0px;
+  background-color: rgb(57, 62, 73);
+}
+
+#new-task-form #tasknotes p:nth-child(2n) {
+  background-color: rgb(66, 72, 85);
+}
+
+#new-task-form button:last-child {
   color: white;
   font-size: 1rem;
   font-weight: bold;
