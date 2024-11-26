@@ -30,13 +30,13 @@ body {
 #sidebar li {
   display: flex;
   justify-content: space-between;
-  align-items:center;
+  align-items: center;
   padding: 3px 0;
 }
 
 #sidebar button {
   background-color: rgb(63, 66, 77);
-  color:rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
   font-size: 1rem;
   font-weight: bold;
   text-align: left;
@@ -68,7 +68,7 @@ body {
 }
 
 #sidebar #sb-project-list li {
-  list-style:square;
+  list-style: square;
   padding: 0px;
   margin-left: 8px;
 }
@@ -93,10 +93,10 @@ body {
 }
 
 #project-list {
-  display:flex;
+  display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap:10px;
+  gap: 10px;
 }
 
 .project-item {
@@ -145,7 +145,8 @@ body {
   font-size: 1.3rem;
 }
 
-.todo-item, .todo-item-expand {
+.todo-item,
+.todo-item-expand {
   display: flex;
   flex-direction: column;
   padding: 10px 10px;
@@ -164,7 +165,8 @@ body {
   background-color: rgb(74, 97, 44);
 }
 
-.todo-item p, .todo-item-expand p {
+.todo-item p,
+.todo-item-expand p {
   padding: 0;
   margin: 0;
   margin-bottom: 6px;
@@ -197,16 +199,16 @@ body {
 /* Styling for new task page */
 
 #new-container {
-background-color: rgba(0, 0, 0, 0.5);
-display: flex;
-justify-content: center;
-align-items: center;
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: white;
 }
 
 #new-form {
@@ -223,7 +225,7 @@ color: white;
   border-radius: 30px;
   padding: 3px 7px;
   background-color: rgba(0, 0, 0, 0.3);
-  color:white;
+  color: white;
   border: 1px solid rgb(138, 137, 137);
 }
 
@@ -237,17 +239,17 @@ color: white;
 }
 
 #new-form ul {
-display: flex;
-flex-direction: column;
-gap:5px;
-padding: 15px 10%;
-background-color: rgb(63, 66, 77);
-border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 15px 10%;
+  background-color: rgb(63, 66, 77);
+  border-radius: 3px;
 }
 
 #new-form li {
-display: flex;
-justify-content:space-between;
+  display: flex;
+  justify-content: space-between;
 
 }
 
@@ -266,13 +268,35 @@ justify-content:space-between;
   border-radius: 5px;
 }
 
+
 #new-form #tasknotebutt {
   border-radius: 3px;
 }
 
+#new-form .remove-note {
+  display: block;
+  position: absolute;
+  border-radius: 30px;
+  padding: 0px 4px;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgb(238, 184, 69);
+  font-weight: bold;
+  border: 0px solid rgb(138, 137, 137);
+  margin-left: 20px;
+  top: 0;
+  right: 1px
+}
+
+#new-form .remove-note:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 #new-form #tasknotes p {
+  position: relative;
   align-self: center;
   padding: 4px;
+  padding-right: 12px; 
   margin: 0px;
   background-color: rgb(57, 62, 73);
 }
@@ -281,7 +305,7 @@ justify-content:space-between;
   background-color: rgb(66, 72, 85);
 }
 
-#new-form button:last-child {
+#new-form #form-submit {
   color: white;
   font-size: 1rem;
   font-weight: bold;
