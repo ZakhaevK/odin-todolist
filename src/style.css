@@ -196,12 +196,47 @@ body {
 
 /* Styling for new task page */
 
-#new-task-form {
-  padding: 10px 80px;
-  
+#new-container {
+background-color: rgba(0, 0, 0, 0.5);
+display: flex;
+justify-content: center;
+align-items: center;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+color: white;
 }
 
-#new-task-form ul {
+#new-form {
+  position: relative;
+  width: 500px;
+  padding: 0px 0px;
+  margin: 0px;
+}
+
+#new-form-exit {
+  position: absolute;
+  right: 30px;
+  top: 40px;
+  border-radius: 30px;
+  padding: 3px 7px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color:white;
+  border: 1px solid rgb(138, 137, 137);
+}
+
+#new-form-exit:hover {
+  background-color: rgb(73, 73, 73);
+}
+
+#new-form-exit:active {
+  background-color: rgb(7, 7, 7);
+  color: rgb(189, 189, 189)
+}
+
+#new-form ul {
 display: flex;
 flex-direction: column;
 gap:5px;
@@ -210,39 +245,43 @@ background-color: rgb(63, 66, 77);
 border-radius: 3px;
 }
 
-#new-task-form li {
+#new-form li {
 display: flex;
 justify-content:space-between;
 
 }
 
-#new-task-form input {
+#new-form input {
   color: white;
   background-color: rgb(57, 61, 70);
 }
 
-#new-task-form select {
+#new-form select {
   color: white;
   background-color: rgb(57, 61, 70);
   border-radius: 4px;
 }
 
-#new-task-form #tasknotebutt {
+#new-form #tasknotes {
+  border-radius: 5px;
+}
+
+#new-form #tasknotebutt {
   border-radius: 3px;
 }
 
-#new-task-form #tasknotes p {
+#new-form #tasknotes p {
   align-self: center;
-  padding: 0px;
+  padding: 4px;
   margin: 0px;
   background-color: rgb(57, 62, 73);
 }
 
-#new-task-form #tasknotes p:nth-child(2n) {
+#new-form #tasknotes p:nth-child(2n) {
   background-color: rgb(66, 72, 85);
 }
 
-#new-task-form button:last-child {
+#new-form button:last-child {
   color: white;
   font-size: 1rem;
   font-weight: bold;
