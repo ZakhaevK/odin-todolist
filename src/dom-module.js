@@ -65,6 +65,35 @@ contentDiv.appendChild(contentTitle);
 contentDiv.appendChild(projListDiv);
 }
 
+function generateAddTodo(projectList) {
+  const body = Document.getElementByTagName("body");
+  // Main container head elements
+  const containerDiv = Document.createElement("div");
+  containerDiv.setAttribute("id", "new-container");
+  const formElement = Document.createElement("form");
+  formElement.setAttribute("id", "new-form");
+  const h1Element = Document.createElement("h1");
+  h1Element.textContent = "Add Task";
+  const exitElement = Document.createElement("new-form-exit");
+  exitElement.textContent = "X";
+  exitElement.setAttribute("id", "new-form-exit");
+  // Content for AddTodo specificly
+  const ulElement = Document.createElement("ul");
+
+  const taskProjLi = Document.createElement("li");
+  const taskProjLabel = Document.createElement("label");
+  taskProjLabel.setAttribute("for", "taskproj");
+  taskProjLabel.textContent = "Project:";
+  const taskProjSelect = Document.createElement("select");
+  taskProjSelect.setAttribute("id", "taskproj");
+  for (let project of projectList) {
+    const projOption = document.createElement("option");
+    projOption.setAttribute("value", project.getTitle());
+    projOption.textContent = project.getTitle();
+    taskProjSelect.appendChild(projOption);
+  }
+}
+
 
 function generateTodoPage(project) {
   contentDiv.replaceChildren("");

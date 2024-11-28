@@ -213,6 +213,9 @@ body {
 
 #new-form {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(63, 66, 77);
   width: 500px;
   padding: 0px 0px;
   margin: 0px;
@@ -239,7 +242,10 @@ body {
 }
 
 #new-form h1 {
-  margin-top: 10px;
+  display: flex;
+  margin: 0;
+  margin-top: 30px;
+  margin-bottom: 10px;
   align-self: center;
 }
 
@@ -248,7 +254,6 @@ body {
   flex-direction: column;
   gap: 5px;
   padding: 15px 10%;
-  background-color: rgb(63, 66, 77);
   border-radius: 3px;
 }
 
