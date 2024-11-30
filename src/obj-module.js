@@ -81,17 +81,18 @@ class TodoItem {
     this.#dueDate = date;
   }
 
-  setStatus(num) {
-    switch(num) {
-      case 0:
-        this.#status = "Pending";
-      case 1:
-        this.#status = "In Progress";
-      case 2:
-        this.#status = "Complete";
-      default:
-        console.log("Invalid input, must be 0 (Pending), 1 (In Progress), or 3 (Complete)")
-    }
+  setStatus(text) {
+    this.#status = text;
+    // switch(num) {
+    //   case 0:
+    //     this.#status = "Pending";
+    //   case 1:
+    //     this.#status = "In Progress";
+    //   case 2:
+    //     this.#status = "Complete";
+    //   default:
+    //     console.log("Invalid input, must be 0 (Pending), 1 (In Progress), or 3 (Complete)")
+    // }
   }
 
   setPriority(priority) {

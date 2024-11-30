@@ -92,6 +92,46 @@ function generateAddTodo(projectList) {
     projOption.textContent = project.getTitle();
     taskProjSelect.appendChild(projOption);
   }
+  taskProjLi.appendChild(taskProjLabel);
+  taskProjLi.appendChild(taskProjSelect);
+  ulElement.appendChild(taskProjLi);
+
+  taskNameInput = addBasicInputElement("taskname", "Name:", "text", ulElement);
+  taskDescInput = addBasicInputElement("taskdesc", "Description:", "text", ulElement);
+  taskDateInput = addBasicInputElement("taskdate", "Due Date:", "date", ulElement);
+
+  const taskStatusLi = Document.createElement("li");
+  const taskStatusLabel = Document.createElement("label");
+  taskStatusLabel.setAttribute("for", "taskstatus");
+  taskStatusLabel.textContent = "Initial Status:";
+  const taskStatusSelect = Document.createElement("select");
+  taskStatusSelect.setAttribute("id", "taskstatus");
+  const statusOptionList = ["Pending", "In Progress", "Complete"];
+  for (let option of statusOptionList) {
+    const projOption = document.createElement("option");
+    projOption.setAttribute("value", option);
+    projOption.textContent = option;
+    taskStatusSelect.appendChild(projOption);
+  }
+  taskStatusLi.appendChild(taskStatusLabel);
+  taskStatusLi.appendChild(taskStatusSelect);
+  ulElement.appendChild(taskStatusLi);
+
+  taskPrio = addBasicInputElement("taskprio", "Priority:", "text", ulElement);
+}
+
+function addBasicInputElement(id, textContent, type, appendTarget) {
+  const li = Document.createElement("li");
+  const label = Document.createElement("label");
+  label.setAttribute("for", id);
+  label.textContent = textContent;
+  const input = Document.createElement("input");
+  input.setAttribute("id", id);
+  input.setAttribute("type", type);
+  li.appendChild(label);
+  li.appendChild(input);
+  appendTarget.appendChild(li);
+  return input; // Maybe necessary for form submission
 }
 
 
