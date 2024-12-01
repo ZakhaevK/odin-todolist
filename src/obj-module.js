@@ -83,6 +83,7 @@ class TodoItem {
 
   setStatus(text) {
     this.#status = text;
+    // Possible usage of number switch here, not currently necessary
     // switch(num) {
     //   case 0:
     //     this.#status = "Pending";

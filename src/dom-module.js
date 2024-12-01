@@ -96,9 +96,9 @@ function generateAddTodo(projectList) {
   taskProjLi.appendChild(taskProjSelect);
   ulElement.appendChild(taskProjLi);
 
-  taskNameInput = addBasicInputElement("taskname", "Name:", "text", ulElement);
-  taskDescInput = addBasicInputElement("taskdesc", "Description:", "text", ulElement);
-  taskDateInput = addBasicInputElement("taskdate", "Due Date:", "date", ulElement);
+  taskNameInput = addBasicFormInput("taskname", "Name:", "text", ulElement);
+  taskDescInput = addBasicFormInput("taskdesc", "Description:", "text", ulElement);
+  taskDateInput = addBasicFormInput("taskdate", "Due Date:", "date", ulElement);
 
   const taskStatusLi = Document.createElement("li");
   const taskStatusLabel = Document.createElement("label");
@@ -117,10 +117,19 @@ function generateAddTodo(projectList) {
   taskStatusLi.appendChild(taskStatusSelect);
   ulElement.appendChild(taskStatusLi);
 
-  taskPrio = addBasicInputElement("taskprio", "Priority:", "text", ulElement);
+  taskPrio = addBasicFormInput("taskprio", "Priority:", "text", ulElement);
+
+  taskNoteButton = addBasicFormInput("tasknotebutt", "", "button", ulElement);
+  taskNoteButton.setAttribute("value", "Add Note");
+  taskNotesDiv = Document.createElement("div");
+  taskNotesDiv.setAttribute("id", "tasknotes");
+  taskNoteButton.addEventListener("click", () => {
+    
+  })
+  
 }
 
-function addBasicInputElement(id, textContent, type, appendTarget) {
+function addBasicFormInput(id, textContent, type, appendTarget) {
   const li = Document.createElement("li");
   const label = Document.createElement("label");
   label.setAttribute("for", id);
@@ -132,6 +141,10 @@ function addBasicInputElement(id, textContent, type, appendTarget) {
   li.appendChild(input);
   appendTarget.appendChild(li);
   return input; // Maybe necessary for form submission
+}
+
+function addTaskNote(taskNotesDiv) {
+
 }
 
 

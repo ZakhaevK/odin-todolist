@@ -283,6 +283,29 @@ body {
   border-radius: 3px;
 }
 
+
+#new-form .remove-note:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#new-form #tasknotes div {
+  position: relative;
+  align-self: center;
+  padding: 4px;
+  padding-right: 12px; 
+  margin: 0px;
+  background-color: rgb(57, 62, 73);
+}
+
+#new-form #tasknotes div:nth-child(2n) {
+  background-color: rgb(66, 72, 85);
+}
+
+#new-form #tasknotes p {
+  margin: 0px
+}
+
 #new-form .remove-note {
   display: block;
   position: absolute;
@@ -295,24 +318,6 @@ body {
   margin-left: 20px;
   top: 0;
   right: 1px
-}
-
-#new-form .remove-note:hover {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-#new-form #tasknotes p {
-  position: relative;
-  align-self: center;
-  padding: 4px;
-  padding-right: 12px; 
-  margin: 0px;
-  background-color: rgb(57, 62, 73);
-}
-
-#new-form #tasknotes p:nth-child(2n) {
-  background-color: rgb(66, 72, 85);
 }
 
 #new-form #form-submit {
