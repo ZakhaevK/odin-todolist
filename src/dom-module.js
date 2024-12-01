@@ -8,8 +8,12 @@ function initialiseMenu(projectList) {
   const sbNewProjButt = document.getElementById("sb-newproj");
   const sbViewProjButt = document.getElementById("sb-viewproj");
 
+  sbAddTodoButt.addEventListener("click", () => {
+    generateAddTodo(projectList);
+  })
+
   sbViewProjButt.addEventListener("click", () => {
-    generateProjectPage();
+    generateProjectPage(projectList);
   })
 
   loadSidebarProjectList(projectList);
@@ -66,25 +70,28 @@ contentDiv.appendChild(projListDiv);
 }
 
 function generateAddTodo(projectList) {
-  const body = Document.getElementByTagName("body");
+  const bodyElement = document.getElementsByTagName("body");
   // Main container head elements
-  const containerDiv = Document.createElement("div");
+  const containerDiv = document.createElement("div");
   containerDiv.setAttribute("id", "new-container");
-  const formElement = Document.createElement("form");
+  const formElement = document.createElement("form");
   formElement.setAttribute("id", "new-form");
-  const h1Element = Document.createElement("h1");
+  const h1Element = document.createElement("h1");
   h1Element.textContent = "Add Task";
-  const exitElement = Document.createElement("new-form-exit");
+  const exitElement = document.createElement("button");
   exitElement.textContent = "X";
   exitElement.setAttribute("id", "new-form-exit");
-  // Content for AddTodo specificly
-  const ulElement = Document.createElement("ul");
 
-  const taskProjLi = Document.createElement("li");
-  const taskProjLabel = Document.createElement("label");
+  formElement.appendChild(h1Element);
+  formElement.appendChild(exitElement);
+  // Content for AddTodo specificly
+  const ulElement = document.createElement("ul");
+
+  const taskProjLi = document.createElement("li");
+  const taskProjLabel = document.createElement("label");
   taskProjLabel.setAttribute("for", "taskproj");
   taskProjLabel.textContent = "Project:";
-  const taskProjSelect = Document.createElement("select");
+  const taskProjSelect = document.createElement("select");
   taskProjSelect.setAttribute("id", "taskproj");
   for (let project of projectList) {
     const projOption = document.createElement("option");
@@ -96,15 +103,15 @@ function generateAddTodo(projectList) {
   taskProjLi.appendChild(taskProjSelect);
   ulElement.appendChild(taskProjLi);
 
-  taskNameInput = addBasicFormInput("taskname", "Name:", "text", ulElement);
-  taskDescInput = addBasicFormInput("taskdesc", "Description:", "text", ulElement);
-  taskDateInput = addBasicFormInput("taskdate", "Due Date:", "date", ulElement);
+  const taskNameInput = addBasicFormInput("taskname", "Name:", "text", ulElement);
+  const taskDescInput = addBasicFormInput("taskdesc", "Description:", "text", ulElement);
+  const  taskDateInput = addBasicFormInput("taskdate", "Due Date:", "date", ulElement);
 
-  const taskStatusLi = Document.createElement("li");
-  const taskStatusLabel = Document.createElement("label");
+  const taskStatusLi = document.createElement("li");
+  const taskStatusLabel = document.createElement("label");
   taskStatusLabel.setAttribute("for", "taskstatus");
   taskStatusLabel.textContent = "Initial Status:";
-  const taskStatusSelect = Document.createElement("select");
+  const taskStatusSelect = document.createElement("select");
   taskStatusSelect.setAttribute("id", "taskstatus");
   const statusOptionList = ["Pending", "In Progress", "Complete"];
   for (let option of statusOptionList) {
@@ -117,24 +124,44 @@ function generateAddTodo(projectList) {
   taskStatusLi.appendChild(taskStatusSelect);
   ulElement.appendChild(taskStatusLi);
 
-  taskPrio = addBasicFormInput("taskprio", "Priority:", "text", ulElement);
+  const taskPrio = addBasicFormInput("taskprio", "Priority:", "text", ulElement);
 
-  taskNoteButton = addBasicFormInput("tasknotebutt", "", "button", ulElement);
+  // const taskNoteLabel = document.createAttribute("label");
+  // taskNoteLabel.textContent = "Notes:"
+
+  const taskNoteButton = addBasicFormInput("tasknotebutt", "Notes:", "button", ulElement);
   taskNoteButton.setAttribute("value", "Add Note");
-  taskNotesDiv = Document.createElement("div");
+  const taskNotesDiv = document.createElement("div");
   taskNotesDiv.setAttribute("id", "tasknotes");
   taskNoteButton.addEventListener("click", () => {
-    
+    let note = prompt("Please enter your note", "");
+    addTaskNote(taskNotesDiv, note);
   })
-  
-}
+  ulElement.appendChild(taskNotesDiv);
 
+  const submitFormButton = document.createElement("button");
+  submitFormButton.setAttribute("type", "submit");
+  submitFormButton.setAttribute("id", "form-submit");
+  submitFormButton.textContent = "Create";
+  submitFormButton.addEventListener("click", () => {
+    // Do a bunch of handling with data and such
+    formElement.remove();
+  })
+  ulElement.appendChild(submitFormButton);
+
+  formElement.appendChild(ulElement);
+  containerDiv.appendChild(formElement);
+  bodyElement[0].appendChild(containerDiv);
+
+}
+// Creates a li element and places a input within it based on constructor with a label.
+// Also appemds each element within the li, and appends to a target.
 function addBasicFormInput(id, textContent, type, appendTarget) {
-  const li = Document.createElement("li");
-  const label = Document.createElement("label");
+  const li = document.createElement("li");
+  const label = document.createElement("label");
   label.setAttribute("for", id);
   label.textContent = textContent;
-  const input = Document.createElement("input");
+  const input = document.createElement("input");
   input.setAttribute("id", id);
   input.setAttribute("type", type);
   li.appendChild(label);
@@ -143,8 +170,23 @@ function addBasicFormInput(id, textContent, type, appendTarget) {
   return input; // Maybe necessary for form submission
 }
 
-function addTaskNote(taskNotesDiv) {
+// Used to add a note to the HTML
+function addTaskNote(taskNotesDiv, note) {
+  const noteDiv = document.createElement("div");
+  const notePara = document.createElement("p");
+  const noteRemove = document.createElement("button");
+  noteRemove.setAttribute("class", "remove-note");
+  noteRemove.textContent = "x"
+  notePara.textContent = note;
 
+  noteRemove.addEventListener("click", () => {
+    noteDiv.replaceChildren("");
+    noteDiv.remove();
+  })
+
+  noteDiv.appendChild(notePara);
+  noteDiv.appendChild(noteRemove);
+  taskNotesDiv.appendChild(noteDiv);
 }
 
 
