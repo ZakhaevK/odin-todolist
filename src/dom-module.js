@@ -1,5 +1,7 @@
-
+import {Project, TodoItem} from  "./obj-module";
 export {  initialiseMenu ,generateProjectPage, generateTodoPage };
+
+const contentDiv = document.getElementById("content");
 
 // This function will initiaise clickable links on the sidebar
 function initialiseMenu(projectList) {
@@ -32,16 +34,22 @@ function loadSidebarProjectList(projectList) {
     projLink.setAttribute("href", ""); // Placeholder
 
     projLI.appendChild(projLink);
-    sbProjectList.appendChild(projLI);
+    projUL.appendChild(projLI);
+
+    projLink.onclick = (e) => {
+      e.preventDefault;
+      generateTodoPage(project);
+    }
   }
+  sbProjectList.appendChild(projUL);
 }
+
 
 function clearSidebarProjectList() {
   const sbProjectList = document.getElementById("sb-project-list")
   sbProjectList.replaceChildren("");
 }
 
-const contentDiv = document.getElementById("content");
 
 function generateProjectPage(projectList) {
   contentDiv.replaceChildren("");
@@ -54,7 +62,7 @@ function generateProjectPage(projectList) {
 
   for (let project of projectList) {
     const projDiv = document.createElement("div");
-    projDiv.setAttribute("class", "project-item")
+    projDiv.setAttribute("class", "project-item");
 
     const titleElement = document.createElement("h2");
     const descElement = document.createElement("p");
@@ -64,10 +72,15 @@ function generateProjectPage(projectList) {
     projDiv.appendChild(titleElement);
     projDiv.appendChild(descElement)
     projListDiv.appendChild(projDiv);
+
+    projDiv.onclick = () => {
+      generateTodoPage(project)
+    }
   }
 contentDiv.appendChild(contentTitle);
 contentDiv.appendChild(projListDiv);
 }
+
 
 function generateAddTodo(projectList) {
   const bodyElement = document.getElementsByTagName("body");
@@ -95,7 +108,7 @@ function generateAddTodo(projectList) {
   taskProjSelect.setAttribute("id", "taskproj");
   for (let project of projectList) {
     const projOption = document.createElement("option");
-    projOption.setAttribute("value", project.getTitle());
+    projOption.setAttribute("value", project.getId()); // Use the auto-generated ID
     projOption.textContent = project.getTitle();
     taskProjSelect.appendChild(projOption);
   }
@@ -126,34 +139,60 @@ function generateAddTodo(projectList) {
 
   const taskPrio = addBasicFormInput("taskprio", "Priority:", "text", ulElement);
 
-  // const taskNoteLabel = document.createAttribute("label");
-  // taskNoteLabel.textContent = "Notes:"
-
   const taskNoteButton = addBasicFormInput("tasknotebutt", "Notes:", "button", ulElement);
   taskNoteButton.setAttribute("value", "Add Note");
   const taskNotesDiv = document.createElement("div");
   taskNotesDiv.setAttribute("id", "tasknotes");
+  const taskNotesList = [];
   taskNoteButton.addEventListener("click", () => {
     let note = prompt("Please enter your note", "");
     addTaskNote(taskNotesDiv, note);
+    taskNotesList.push(note);
   })
   ulElement.appendChild(taskNotesDiv);
 
   const submitFormButton = document.createElement("button");
+  
   submitFormButton.setAttribute("type", "submit");
   submitFormButton.setAttribute("id", "form-submit");
   submitFormButton.textContent = "Create";
-  submitFormButton.addEventListener("click", () => {
-    // Do a bunch of handling with data and such
-    formElement.remove();
-  })
-  ulElement.appendChild(submitFormButton);
+  submitFormButton.addEventListener("click", (e) => {
+    e.preventDefault();
+  
+    const selectedProjectId = taskProjSelect.value; // Get the selected project ID
+    const newTaskProject = Project.getProjectById(selectedProjectId); // Retrieve the project from the class Map
+  
+    if (newTaskProject) {
+      const newTaskName = taskNameInput.value;
+      const newTaskDesc = taskDescInput.value;
+      const newTaskDate = taskDateInput.value;
+      const newTaskStatus = taskStatusSelect.value;
+      const newTaskPriority = taskPrio.value;
+  
+      const newTask = new TodoItem(
+        newTaskName,
+        newTaskDesc,
+        newTaskDate,
+        newTaskStatus,
+        newTaskPriority,
+        taskNotesList
+      );
+  
+      newTaskProject.addTodo(newTask); // Add the task to the selected project
+      containerDiv.remove(); // Remove the whole container to give user control back
+      console.log(newTaskProject.getTodoList());
+    } else {
+      console.error("Invalid project selected");
+    }
+  });
 
+  ulElement.appendChild(submitFormButton);
   formElement.appendChild(ulElement);
   containerDiv.appendChild(formElement);
   bodyElement[0].appendChild(containerDiv);
-
 }
+
+
 // Creates a li element and places a input within it based on constructor with a label.
 // Also appemds each element within the li, and appends to a target.
 function addBasicFormInput(id, textContent, type, appendTarget) {
@@ -169,6 +208,7 @@ function addBasicFormInput(id, textContent, type, appendTarget) {
   appendTarget.appendChild(li);
   return input; // Maybe necessary for form submission
 }
+
 
 // Used to add a note to the HTML
 function addTaskNote(taskNotesDiv, note) {
@@ -230,6 +270,7 @@ function generateTodoItem(todo, todoDiv) {
 
   todoDiv.onclick = () => toggleTodoItem(todo, todoDiv);
 }
+
 
 function toggleTodoItem(todo, todoDiv) {
   const isExpanded = todoDiv.classList.contains("todo-item-expand");
