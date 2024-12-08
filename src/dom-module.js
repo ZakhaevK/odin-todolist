@@ -31,7 +31,6 @@ function loadSidebarProjectList(projectList) {
     const projLI = document.createElement("li");
     const projLink = document.createElement("a");
     projLink.textContent = project.getTitle();
-    projLink.setAttribute("href", ""); // Placeholder
 
     projLI.appendChild(projLink);
     projUL.appendChild(projLI);
@@ -108,7 +107,7 @@ function generateAddTodo(projectList) {
   taskProjSelect.setAttribute("id", "taskproj");
   for (let project of projectList) {
     const projOption = document.createElement("option");
-    projOption.setAttribute("value", project.getId()); // Use the auto-generated ID
+    projOption.setAttribute("value", project.getId());
     projOption.textContent = project.getTitle();
     taskProjSelect.appendChild(projOption);
   }
