@@ -136,7 +136,24 @@ function generateAddTodo(projectList) {
   taskStatusLi.appendChild(taskStatusSelect);
   ulElement.appendChild(taskStatusLi);
 
-  const taskPrio = addBasicFormInput("taskprio", "Priority:", "text", ulElement);
+  const taskPrioLi = document.createElement("li");
+  const taskPrioLabel = document.createElement("label");
+  taskPrioLabel.setAttribute("for", "taskprio");
+  taskPrioLabel.textContent = "Initial Priority:";
+  const taskPrioSelect = document.createElement("select");
+  taskPrioSelect.setAttribute("id", "taskprio");
+  const prioOptionList = ["Low", "Medium", "High"];
+  for (let option of prioOptionList) {
+    const projOption = document.createElement("option");
+    projOption.setAttribute("value", option);
+    projOption.textContent = option;
+    taskPrioSelect.appendChild(projOption);
+  }
+  taskPrioLi.appendChild(taskPrioLabel);
+  taskPrioLi.appendChild(taskPrioSelect);
+  ulElement.appendChild(taskPrioLi);
+
+  // const taskPrio = addBasicFormInput("taskprio", "Priority:", "text", ulElement);
 
   const taskNoteButton = addBasicFormInput("tasknotebutt", "Notes:", "button", ulElement);
   taskNoteButton.setAttribute("value", "Add Note");
@@ -166,7 +183,7 @@ function generateAddTodo(projectList) {
       const newTaskDesc = taskDescInput.value;
       const newTaskDate = taskDateInput.value;
       const newTaskStatus = taskStatusSelect.value;
-      const newTaskPriority = taskPrio.value;
+      const newTaskPriority = taskPrioSelect.value;
   
       const newTask = new TodoItem(
         newTaskName,
