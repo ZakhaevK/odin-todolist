@@ -2,9 +2,11 @@ import {Project, TodoItem} from  "./obj-module";
 export {  initialiseMenu ,generateProjectPage, generateTodoPage };
 
 const contentDiv = document.getElementById("content");
+let projectList = Project.getAllProjects();
 
 // This function will initiaise clickable links on the sidebar
-function initialiseMenu(projectList) {
+function initialiseMenu() {
+  projectList = Project.getAllProjects();
   const sidebarDiv = document.getElementById("sidebar");
   const sbAddTodoButt = document.getElementById("sb-addtodo");
   const sbNewProjButt = document.getElementById("sb-newproj");
@@ -15,7 +17,7 @@ function initialiseMenu(projectList) {
   })
 
   sbNewProjButt.addEventListener("click", () => {
-    generateNewProject();
+    generateNewProject(projectList);
   })
 
   sbViewProjButt.addEventListener("click", () => {
@@ -27,9 +29,8 @@ function initialiseMenu(projectList) {
 
 function loadSidebarProjectList(projectList) {
   const sbProjectList = document.getElementById("sb-project-list")
-  const projUL = document.createElement("ul");
-
   clearSidebarProjectList(); // Clear current projects
+  const projUL = document.createElement("ul");
 
   for (let project of projectList) {
     const projLI = document.createElement("li");
@@ -54,7 +55,7 @@ function clearSidebarProjectList() {
 }
 
 
-function generateProjectPage(projectList) {
+function generateProjectPage() {
   contentDiv.replaceChildren("");
 
   const contentTitle = document.createElement("h1");
@@ -84,7 +85,7 @@ contentDiv.appendChild(contentTitle);
 contentDiv.appendChild(projListDiv);
 }
 
-function generateAddTodo(projectList) {
+function generateAddTodo() {
   const bodyElement = document.getElementsByTagName("body");
   // Main container head elements
   const containerDiv = document.createElement("div");
@@ -215,7 +216,7 @@ function generateAddTodo(projectList) {
   bodyElement[0].appendChild(containerDiv);
 }
 
-function generateNewProject(projectList) {
+function generateNewProject() {
   const bodyElement = document.getElementsByTagName("body");
   // Main container head elements
   const containerDiv = document.createElement("div");
@@ -255,6 +256,8 @@ function generateNewProject(projectList) {
       );
 
       containerDiv.remove(); // Remove the whole container to give user control back
+      projectList = Project.getAllProjects();
+      loadSidebarProjectList(Project.getAllProjects());
       console.log(projectList);
   });
 
@@ -262,6 +265,9 @@ function generateNewProject(projectList) {
   formElement.appendChild(ulElement);
   containerDiv.appendChild(formElement);
   bodyElement[0].appendChild(containerDiv);
+
+
+  console.log(Project.getAllProjects())
 }
 
 
