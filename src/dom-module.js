@@ -14,6 +14,10 @@ function initialiseMenu(projectList) {
     generateAddTodo(projectList);
   })
 
+  sbNewProjButt.addEventListener("click", () => {
+    generateNewProject();
+  })
+
   sbViewProjButt.addEventListener("click", () => {
     generateProjectPage(projectList);
   })
@@ -80,7 +84,6 @@ contentDiv.appendChild(contentTitle);
 contentDiv.appendChild(projListDiv);
 }
 
-
 function generateAddTodo(projectList) {
   const bodyElement = document.getElementsByTagName("body");
   // Main container head elements
@@ -93,6 +96,10 @@ function generateAddTodo(projectList) {
   const exitElement = document.createElement("button");
   exitElement.textContent = "X";
   exitElement.setAttribute("id", "new-form-exit");
+  exitElement.onclick = (e) => {
+    e.preventDefault();
+    containerDiv.remove(); 
+  }
 
   formElement.appendChild(h1Element);
   formElement.appendChild(exitElement);
@@ -200,6 +207,55 @@ function generateAddTodo(projectList) {
     } else {
       console.error("Invalid project selected");
     }
+  });
+
+  ulElement.appendChild(submitFormButton);
+  formElement.appendChild(ulElement);
+  containerDiv.appendChild(formElement);
+  bodyElement[0].appendChild(containerDiv);
+}
+
+function generateNewProject(projectList) {
+  const bodyElement = document.getElementsByTagName("body");
+  // Main container head elements
+  const containerDiv = document.createElement("div");
+  containerDiv.setAttribute("id", "new-container");
+  const formElement = document.createElement("form");
+  formElement.setAttribute("id", "new-form");
+  const h1Element = document.createElement("h1");
+  h1Element.textContent = "New Project";
+  const exitElement = document.createElement("button");
+  exitElement.textContent = "X";
+  exitElement.setAttribute("id", "new-form-exit");
+  exitElement.onclick = (e) => {
+    e.preventDefault();
+    containerDiv.remove(); 
+  }
+  formElement.appendChild(h1Element);
+  formElement.appendChild(exitElement);
+
+  // Content for NewProject specificly
+  const ulElement = document.createElement("ul");
+  const titleInput = addBasicFormInput("projtitle", "Project Title:", "text", ulElement);
+  const descInput = addBasicFormInput("projdesc", "Project Description:", "textbox", ulElement);
+
+  const submitFormButton = document.createElement("button");
+  submitFormButton.setAttribute("type", "submit");
+  submitFormButton.setAttribute("id", "form-submit");
+  submitFormButton.textContent = "Create";
+  submitFormButton.addEventListener("click", (e) => {
+    e.preventDefault();
+  
+      const newProjTitle = titleInput.value;
+      const newProjDesc = descInput.value;
+  
+      const newProj = new Project(
+        newProjTitle,
+        newProjDesc,
+      );
+
+      containerDiv.remove(); // Remove the whole container to give user control back
+      console.log(projectList);
   });
 
   ulElement.appendChild(submitFormButton);
