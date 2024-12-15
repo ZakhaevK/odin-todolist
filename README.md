@@ -9,9 +9,10 @@ Individual todo's will have several properties as per below:
 - title
 - description
 - dueDate
+- status
 - priority
 - notes
-- checklist
+
 
 ## Projects
 Projects will essentially be lists of todo items.
