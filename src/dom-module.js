@@ -204,6 +204,7 @@ function generateAddTodo() {
   
       newTaskProject.addTodo(newTask); // Add the task to the selected project
       containerDiv.remove(); // Remove the whole container to give user control back
+      generateTodoPage(newTaskProject);
       console.log(newTaskProject.getTodoList());
     } else {
       console.error("Invalid project selected");

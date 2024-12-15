@@ -29,6 +29,6 @@ const testTodo2 = new TodoItem("Test the todolist again", "Simply test the displ
 testProj.addTodo(testTodo);
 testProj.addTodo(testTodo2);
 
- generateProjectPage();
-// generateTodoPage(testProj);
 initialiseMenu();
+generateProjectPage();
+// generateTodoPage(testProj);
