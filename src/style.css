@@ -184,13 +184,55 @@ body {
 }
 
 .todo-item-expand ul {
+  position: relative;
   margin: 0;
   padding: 0;
   margin-bottom: 6px;
 }
 
 .todo-item-expand li {
+  position: relative;
   margin: 0 18px;
+  list-style: none;
+}
+
+.todo-item-expand .add-note {
+  display: block;
+  position: absolute;
+  border-radius: 30px;
+  padding: 0px 4px;
+  background-color: rgba(255, 239, 227, 0.411);
+  color: rgb(63, 114, 5);
+  font-weight: bold;
+  font-size: 1rem;
+  border: 2px solid rgb(78, 119, 40);
+  margin-left: 20px;
+  top: -27px;
+  left: 30px
+}
+
+.todo-item-expand .add-note:hover {
+  background-color: rgba(85, 145, 7, 0.904);
+  color: rgb(231, 220, 220);
+}
+
+.todo-item-expand .remove-note {
+  display: block;
+  position: absolute;
+  border-radius: 30px;
+  padding: 0px 3.4px;
+  background-color: rgba(233, 206, 175, 0.63);
+  color: rgb(172, 24, 24);
+  font-weight: bold;
+  border: 0px solid rgb(138, 137, 137);
+  margin-left: 20px;
+  top: 0;
+  left: -40px
+}
+
+.todo-item-expand .remove-note:hover {
+  color: white;
+  background-color: rgba(196, 28, 28, 0.473);
 }
 
 .todo-item button {
@@ -285,10 +327,6 @@ body {
 }
 
 
-#new-form .remove-note:hover {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.2);
-}
 
 #new-form #tasknotes div {
   position: relative;
@@ -319,6 +357,11 @@ body {
   margin-left: 20px;
   top: 0;
   right: 1px
+}
+
+#new-form .remove-note:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 #new-form #form-submit {

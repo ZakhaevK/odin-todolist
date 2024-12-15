@@ -125,8 +125,8 @@ class TodoItem {
     this.#priority = priority;
   }
 
-  addNote(priority) {
-    this.#notes.push(priority);
+  addNote(note) {
+    this.#notes.push(note);
   }
 
   deleteNote(index) {

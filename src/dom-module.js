@@ -125,7 +125,7 @@ function generateAddTodo() {
 
   const taskNameInput = addBasicFormInput("taskname", "Name:", "text", ulElement);
   const taskDescInput = addBasicFormInput("taskdesc", "Description:", "text", ulElement);
-  const  taskDateInput = addBasicFormInput("taskdate", "Due Date:", "date", ulElement);
+  const taskDateInput = addBasicFormInput("taskdate", "Due Date:", "date", ulElement);
 
   const taskStatusLi = document.createElement("li");
   const taskStatusLabel = document.createElement("label");
@@ -168,11 +168,14 @@ function generateAddTodo() {
   const taskNotesDiv = document.createElement("div");
   taskNotesDiv.setAttribute("id", "tasknotes");
   const taskNotesList = [];
+
   taskNoteButton.addEventListener("click", () => {
     let note = prompt("Please enter your note", "");
-    addTaskNote(taskNotesDiv, note);
-    taskNotesList.push(note);
-  })
+    if (note) {
+      addTaskNote(taskNotesDiv, note, taskNotesList);
+      taskNotesList.push(note); 
+    }
+  });
   ulElement.appendChild(taskNotesDiv);
 
   const submitFormButton = document.createElement("button");
@@ -261,12 +264,11 @@ function generateNewProject() {
       loadSidebarProjectList(Project.getAllProjects());
       console.log(projectList);
   });
-
+  //  Append all remaining elements to their parent
   ulElement.appendChild(submitFormButton);
   formElement.appendChild(ulElement);
   containerDiv.appendChild(formElement);
   bodyElement[0].appendChild(containerDiv);
-
 
   console.log(Project.getAllProjects())
 }
@@ -289,19 +291,27 @@ function addBasicFormInput(id, textContent, type, appendTarget) {
 }
 
 
-// Used to add a note to the HTML
-function addTaskNote(taskNotesDiv, note) {
+function addTaskNote(taskNotesDiv, note, taskNotesList) {
   const noteDiv = document.createElement("div");
   const notePara = document.createElement("p");
   const noteRemove = document.createElement("button");
+
   noteRemove.setAttribute("class", "remove-note");
-  noteRemove.textContent = "x"
+  noteRemove.textContent = "x";
   notePara.textContent = note;
 
+  // Remove note from both HTML and taskNotesList
   noteRemove.addEventListener("click", () => {
-    noteDiv.replaceChildren("");
+    // Find the index of the note in the taskNotesList
+    const noteIndex = taskNotesList.indexOf(note);
+
+    // Remove the note from the array if it exists
+    if (noteIndex > -1) {
+      taskNotesList.splice(noteIndex, 1);
+    }
+    // Remove the noteDiv from the DOM
     noteDiv.remove();
-  })
+  });
 
   noteDiv.appendChild(notePara);
   noteDiv.appendChild(noteRemove);
@@ -366,18 +376,54 @@ function toggleTodoItem(todo, todoDiv) {
 
     todoDesc.textContent = `Description: ${todo.getDescription()}`;
     notesPara.textContent = "Notes:";
+    const noteAdd = document.createElement("button");
+    noteAdd.setAttribute("class", "add-note");
+    noteAdd.textContent = "+";
 
-    for (const note of todo.getNotes()) {
-      const noteLI = document.createElement("li");
-      noteLI.textContent = note;
-      notesUL.appendChild(noteLI);
-    }
+    noteAdd.addEventListener("click", (e) => {
+      e.stopPropagation();
+      let note = prompt("Please enter your note", "");
+      if (note) {
+        todo.addNote(note);
+        removeChildrenOfTag(notesUL, "li")
+        generateTodoExpandNotes(todo, notesUL);
+      }
+    })
+
+    generateTodoExpandNotes(todo, notesUL);
 
     todoDiv.setAttribute("class", "todo-item-expand");
     todoDiv.appendChild(todoDesc);
     todoDiv.appendChild(notesPara);
+    notesUL.appendChild(noteAdd);
     todoDiv.appendChild(notesUL);
 
     todoDiv.onclick = () => toggleTodoItem(todo, todoDiv);
   }
+}
+
+function generateTodoExpandNotes(todo, notesUL) {
+  for (const note of todo.getNotes()) {
+    const noteLI = document.createElement("li");
+    noteLI.textContent = note;
+
+    const noteRemove = document.createElement("button");
+    noteRemove.setAttribute("class", "remove-note");
+    noteRemove.textContent = "x";
+
+    noteRemove.addEventListener("click", (e) => {
+      e.stopPropagation();
+      noteLI.remove();
+      todo.deleteNote(todo.getNotes().indexOf(note));
+    })
+
+    noteLI.appendChild(noteRemove);
+    notesUL.appendChild(noteLI);
+  }
+}
+
+// Removes all children of a tag (e.g. li, p) type from a parent element
+function removeChildrenOfTag(parentElement, tag) {
+  const children = parentElement.querySelectorAll(tag);
+  children.forEach(child => parentElement.removeChild(child));
 }
