@@ -21,7 +21,7 @@ const testTodo = new TodoItem("Test the todolist", "Simply test the display of a
 
 const testTodo2 = new TodoItem("Test the todolist again", "Simply test the display of a Todo within a Project", 
   curDate.toDateString(), 
-  "Medium", 
+  "In Progress", 
   "Complete",
   ["Should be interesting", "Will provide insight."]
 )

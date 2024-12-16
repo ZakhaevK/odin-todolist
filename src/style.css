@@ -1,3 +1,10 @@
+:root {
+  --prio-low: rgb(127, 129, 95);
+  --prio-med: rgb(182, 125, 50);
+  --prio-high: rgb(177, 75, 50);
+  --status-complete: rgb(44, 107, 25);
+}
+
 body {
   display: grid;
   justify-content: center;
@@ -167,10 +174,18 @@ body {
 }
 
 .todo-item p,
-.todo-item-expand p {
+.todo-item div,
+.todo-item-expand p,
+.todo-item-expand div {
   padding: 0;
   margin: 0;
   margin-bottom: 6px;
+}
+
+.todo-item select,
+.todo-item-expand select {
+  background-color: rgba(17, 17, 17, 0.37);
+  color: white;
 }
 
 .todo-item-expand {

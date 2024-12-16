@@ -347,15 +347,19 @@ function generateTodoItem(todo, todoDiv) {
   const statusElement = document.createElement("p");
   
   titleElement.textContent = todo.getTitle();
-  priorityElement.textContent = `Priority: ${todo.getPriority()}`;
+  // priorityElement.textContent = `Priority: ${todo.getPriority()}`;
   dateElement.textContent = `Due Date: ${todo.getDueDate()}`;
-  statusElement.textContent = `Status: ${todo.getStatus()}`;
+  // statusElement.textContent = `Status: ${todo.getStatus()}`;
 
   todoDiv.setAttribute("class", "todo-item");
+  updateTodoItemColor(todo, todoDiv);
+
   todoDiv.appendChild(titleElement);
-  todoDiv.appendChild(priorityElement);
+  // todoDiv.appendChild(priorityElement);
+  todoDiv.appendChild(generateTodoPriority(todo, todoDiv));
   todoDiv.appendChild(dateElement);
-  todoDiv.appendChild(statusElement);
+  todoDiv.appendChild(generateTodoStatus(todo, todoDiv));
+  // todoDiv.appendChild(statusElement);
 
   todoDiv.onclick = () => toggleTodoItem(todo, todoDiv);
 }
@@ -393,6 +397,8 @@ function toggleTodoItem(todo, todoDiv) {
     generateTodoExpandNotes(todo, notesUL);
 
     todoDiv.setAttribute("class", "todo-item-expand");
+
+
     todoDiv.appendChild(todoDesc);
     todoDiv.appendChild(notesPara);
     notesUL.appendChild(noteAdd);
@@ -402,6 +408,109 @@ function toggleTodoItem(todo, todoDiv) {
   }
 }
 
+function updateTodoItemColor(todo, todoDiv) {
+  if (todo.getStatus() == "Complete") {
+    todoDiv.setAttribute("style", "background-color:var(--status-complete)")
+  } else {
+    switch(todo.getPriority()) {
+      case "Low":
+        todoDiv.setAttribute("style", "background-color:var(--prio-low)");
+        break;
+      case "Medium":
+        todoDiv.setAttribute("style", "background-color:var(--prio-med)");
+        break; 
+      case "High":
+        todoDiv.setAttribute("style", "background-color:var(--prio-high)");
+        break; 
+    }
+  }
+}
+
+function generateTodoPriority(todo, todoDiv) {
+  const div = document.createElement("div");
+  const label = document.createElement("label");
+  label.setAttribute("for", "taskprio");
+  label.textContent = "Priority: "
+  const select = document.createElement("select");
+  select.setAttribute("id", "taskprio");
+
+  const options = ["Low", "Medium", "High"];
+  for (const option of options) {
+    const optionEle = document.createElement("option");
+    optionEle.textContent = option;
+    optionEle.value = option;
+
+    optionEle.addEventListener("click", (e) => {
+      e.stopPropagation();
+    })
+
+    if (option == todo.getPriority()) {
+      optionEle.setAttribute("selected", "true");
+    }
+
+    select.appendChild(optionEle);
+  }
+
+  select.addEventListener("click", (e) => {
+    e.stopPropagation();
+    todo.setPriority(select.value);
+    updateTodoItemColor(todo, todoDiv);
+    }
+  )
+
+  // select.addEventListener("onchange", (e) => {
+  //   e.stopPropagation();
+  //   todo.setPriority(select.value);
+  // })
+
+  div.appendChild(label);
+  div.appendChild(select);
+
+  return div;
+}
+
+function generateTodoStatus(todo, todoDiv) {
+  const div = document.createElement("div");
+  const label = document.createElement("label");
+  label.setAttribute("for", "taskstatus");
+  label.textContent = "Status: "
+  const select = document.createElement("select");
+  select.setAttribute("id", "taskstatus");
+
+  const options = ["Pending", "In Progress", "Complete"];
+  for (const option of options) {
+    const optionEle = document.createElement("option");
+    optionEle.textContent = option;
+    optionEle.value = option;
+
+    optionEle.addEventListener("click", (e) => {
+      e.stopPropagation();
+    })
+
+    if (option == todo.getStatus()) {
+      optionEle.setAttribute("selected", "true");
+    }
+
+    select.appendChild(optionEle);
+  }
+
+  select.addEventListener("click", (e) => {
+    e.stopPropagation();
+    todo.setStatus(select.value);
+    updateTodoItemColor(todo, todoDiv);
+  })
+
+  select.addEventListener("onchange", (e) => {
+    e.stopPropagation();
+    todo.setStatus(select.value);
+  })
+  div.appendChild(label);
+  div.appendChild(select);
+
+  return div;
+}
+
+// Creates removable notes for todoItem page
 function generateTodoExpandNotes(todo, notesUL) {
   for (const note of todo.getNotes()) {
     const noteLI = document.createElement("li");
