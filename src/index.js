@@ -4,30 +4,33 @@ import { initialiseMenu, generateProjectPage, generateTodoPage } from "./dom-mod
 
 const fns = require('date-fns');
 
-const testProj = new Project("Test 1", "Project only to be used in testing");
-const testProj2 = new Project("Test 2", "Project only to be used in testing");
+Project.loadFromLocalStorage();
+console.log(Project.getAllProjects());
 
-console.log(Project.getAllProjects())
+if (Project.getAllProjects().length == 0) {
+  const testProj = new Project("Default Project", "Basic project used as an example.");
+  const testProj2 = new Project("Default Project 2", "A second basic project to start with");
 
-const curDate = new Date(0);
-const curDate2 = fns.format(curDate, "yyyy-MM-dd' | 'HH:mm");
+  console.log(Project.getAllProjects())
 
-const testTodo = new TodoItem("Test the todolist", "Simply test the display of a Todo within a Project", 
-  curDate2,
-  "Pending", 
-  "High", 
-  ["Should be interesting", "Will provide insight."]
-)
+  const testTodo = new TodoItem("Test the todolist", "Simply test the display of a Todo within a Project", 
+    "2024-12-03",
+    "Pending", 
+    "High", 
+    ["Should be interesting", "Will provide insight."]
+  )
 
-const testTodo2 = new TodoItem("Test the todolist again", "Simply test the display of a Todo within a Project", 
-  curDate.toDateString(), 
-  "In Progress", 
-  "Complete",
-  ["Should be interesting", "Will provide insight."]
-)
+  const testTodo2 = new TodoItem("Test the todolist again", "Simply test the display of a Todo within a Project", 
+    "2024-12-05", 
+    "In Progress", 
+    "Complete",
+    ["Couldn't be less interesting", "Will reduce insight.", "Here's another note because why not."]
+  )
 
-testProj.addTodo(testTodo);
-testProj.addTodo(testTodo2);
+  testProj.addTodo(testTodo);
+  testProj.addTodo(testTodo2);
+}
+
 
 initialiseMenu();
 generateProjectPage();

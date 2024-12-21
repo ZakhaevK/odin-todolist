@@ -1,6 +1,6 @@
 export {Project, TodoItem};
 
-const ls = require('local-storage');
+// const ls = require('local-storage');
 
 class Project {
   #title = "";
@@ -17,6 +17,7 @@ class Project {
     this.#todoList = [];
     this.#id = Project.#generateId(); // Automatically generate a unique ID
     Project.#projectMap.set(this.#id, this); // Add this project to the Map
+    Project.exportToLocalStorage();
   }
 
   // Generate a zero-padded ID (e.g. "0001", "0002")
@@ -32,6 +33,11 @@ class Project {
   // Get all projects as an array
   static getAllProjects() {
     return Array.from(Project.#projectMap.values()); 
+  }
+
+  static exportToLocalStorage() {
+    localStorage.setItem("projects", JSON.stringify(Project.getAllProjects()));
+    console.log("Local Storage:" + localStorage.getItem("projects"));
   }
   
   getTitle() {
@@ -52,7 +58,49 @@ class Project {
 
   addTodo(todoItem) {
     this.#todoList.push(todoItem);
+    Project.exportToLocalStorage();
   }
+
+  toJSON() {
+    return {
+      title: this.#title,
+      description: this.#description,
+      todoList: this.#todoList,
+      id: this.#id,
+    };
+  }
+
+  static loadFromLocalStorage() {
+    const storedProjects = JSON.parse(localStorage.getItem("projects"));
+    
+    if (storedProjects && Array.isArray(storedProjects)) {
+      // Clear existing static data
+      Project.#projectMap.clear();
+      Project.#idCounter = 1;
+  
+      // Reconstruct projects
+      storedProjects.forEach((projectData) => {
+        const project = new Project(projectData.title, projectData.description);
+  
+        // Re-add todos to the project
+        projectData.todoList.forEach((todoData) => {
+          const todoItem = new TodoItem(
+            todoData.title,
+            todoData.description,
+            todoData.dueDate,
+            todoData.status,
+            todoData.priority,
+            todoData.notes
+          );
+          project.addTodo(todoItem);
+        });
+  
+        // Add the project to the map
+        Project.#projectMap.set(project.getId(), project);
+      });
+    }
+  }
+  
 }
 
 class TodoItem {
@@ -133,6 +181,17 @@ class TodoItem {
 
   deleteNote(index) {
     this.#notes.splice(index, 1);
+  }
+
+  toJSON() {
+    return {
+      title: this.#title,
+      description: this.#description,
+      dueDate: this.#dueDate, // This will automatically serialize as a string
+      status: this.#status,
+      priority: this.#priority,
+      notes: this.#notes,
+    };
   }
 
 }
